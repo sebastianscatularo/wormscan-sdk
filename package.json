@@ -31,5 +31,8 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx,scss,css,md}": "prettier --write"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.2.5"
+  }
 }
