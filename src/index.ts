@@ -1,4 +1,9 @@
-import { IHealth } from "./interfaces";
+import {
+  IHealth,
+  IGovernorsConfigurationInput,
+  IGovernorsConfigurationByGuardianId,
+  IGovernorsConfiguration,
+} from "./interfaces";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 class WormScanSDK {
@@ -19,16 +24,47 @@ class WormScanSDK {
     } catch (e: any) {
       const errors = e as Error | AxiosError;
       if (!axios.isAxiosError(errors)) {
-        // do whatever you want with native error
+        // do whatever you want with native error.
         throw new Error(errors.message);
       }
-      // do what you want with your axios error
+      // do what you want with your axios error.
       throw new Error(errors.message);
     }
   }
 
+  /**
+   * Health check.
+   */
   public async checkHealth() {
     return this.request<IHealth>("/health");
+  }
+
+  /**
+   * Returns governor configuration for all guardians.
+   */
+  public async getGovernorsConfiguration({
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorsConfigurationInput) {
+    return this.request<IGovernorsConfiguration>("/governor/config", {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   *
+   * Returns governor configuration for a given guardian.
+   */
+  public async getGovernorConfigurationByGuardianId({
+    guardianId,
+    page,
+    pageSize,
+    sortOrder,
+  }: { guardianId: string } & IGovernorsConfigurationInput) {
+    return this.request<IGovernorsConfigurationByGuardianId>(`/governor/config/${guardianId}`, {
+      params: { page, pageSize, sortOrder },
+    });
   }
 }
 
