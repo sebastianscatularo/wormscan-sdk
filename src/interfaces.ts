@@ -1,13 +1,13 @@
+type TSortOptions = {
+  page?: number;
+  pageSize?: number;
+  sortOrder?: "ASC" | "DESC";
+};
 export interface IHealth {
   status: string;
 }
 
-export interface IGovernorsConfigurationInput {
-  page?: number;
-  pageSize?: number;
-  sortOrder?: "ASC" | "DESC";
-}
-
+export interface IGovernorsConfigurationInput extends TSortOptions {}
 export interface IGovernorsConfiguration {
   data: TGovernorConfiguration[];
   pagination: {
@@ -40,11 +40,7 @@ type TGovernorConfiguration = {
   }[];
 };
 
-export interface IGovernorsEnqueuedVaasInput {
-  page?: number;
-  pageSize?: number;
-  sortOrder?: "ASC" | "DESC";
-}
+export interface IGovernorsEnqueuedVaasInput extends TSortOptions {}
 
 export interface IGovernorsEnqueuedVaas {
   data: {
@@ -70,3 +66,17 @@ type TGovernorEnqueuedVaas = {
   sequence: string;
   txHash: string;
 };
+
+export interface IGovernorsLimitInput extends TSortOptions {}
+
+export interface IGovernorsLimit {
+  data: {
+    availableNotional: number;
+    chainId: number;
+    maxTransactionSize: number;
+    notionalLimit: number;
+  }[];
+  pagination: {
+    next: string;
+  };
+}
