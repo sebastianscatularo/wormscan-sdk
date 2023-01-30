@@ -47,14 +47,17 @@ export interface IGovernorsEnqueuedVaasInput {
 }
 
 export interface IGovernorsEnqueuedVaas {
-  data: TGovernorEnqueuedVaas[];
+  data: {
+    chainId: number;
+    enqueuedVaas: TGovernorEnqueuedVaas[];
+  }[];
   pagination: {
     next: string;
   };
 }
 
 export interface IGovernorEnqueuedVaasByChainId {
-  data: TGovernorEnqueuedVaas;
+  data: TGovernorEnqueuedVaas[];
   pagination: {
     next: string;
   };
@@ -62,11 +65,8 @@ export interface IGovernorEnqueuedVaasByChainId {
 
 type TGovernorEnqueuedVaas = {
   chainId: number;
-  enqueuedVaas: {
-    chainId: number;
-    emitterAddress: string;
-    notionalValue: number;
-    sequence: string;
-    txHash: string;
-  }[];
+  emitterAddress: string;
+  notionalValue: number;
+  sequence: string;
+  txHash: string;
 };
