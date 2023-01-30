@@ -1,8 +1,11 @@
 import {
   IHealth,
   IGovernorsConfigurationInput,
-  IGovernorsConfigurationByGuardianId,
   IGovernorsConfiguration,
+  IGovernorsConfigurationByGuardianId,
+  IGovernorsEnqueuedVaasInput,
+  IGovernorsEnqueuedVaas,
+  IGovernorEnqueuedVaasByChainId,
 } from "./interfaces";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -63,6 +66,33 @@ class WormScanSDK {
     sortOrder,
   }: { guardianId: string } & IGovernorsConfigurationInput) {
     return this.request<IGovernorsConfigurationByGuardianId>(`/governor/config/${guardianId}`, {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns enqueued VAAs for each blockchain.
+   */
+  public async getGovernorsEnqueuedVaas({
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorsEnqueuedVaasInput) {
+    return this.request<IGovernorsEnqueuedVaas>("/governor/enqueued_vaas", {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns all enqueued VAAs for a given blockchain.
+   */
+  public async getGovernorsEnqueuedVaasByChainId({
+    chainId,
+    page,
+    pageSize,
+    sortOrder,
+  }: { chainId: string } & IGovernorsEnqueuedVaasInput) {
+    return this.request<IGovernorEnqueuedVaasByChainId>(`/governor/enqueued_vaas/${chainId}`, {
       params: { page, pageSize, sortOrder },
     });
   }
