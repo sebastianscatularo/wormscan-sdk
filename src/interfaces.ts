@@ -39,3 +39,34 @@ type TGovernorConfiguration = {
     price: number;
   }[];
 };
+
+export interface IGovernorsEnqueuedVaasInput {
+  page?: number;
+  pageSize?: number;
+  sortOrder?: "ASC" | "DESC";
+}
+
+export interface IGovernorsEnqueuedVaas {
+  data: {
+    chainId: number;
+    enqueuedVaas: TGovernorEnqueuedVaas[];
+  }[];
+  pagination: {
+    next: string;
+  };
+}
+
+export interface IGovernorEnqueuedVaasByChainId {
+  data: TGovernorEnqueuedVaas[];
+  pagination: {
+    next: string;
+  };
+}
+
+type TGovernorEnqueuedVaas = {
+  chainId: number;
+  emitterAddress: string;
+  notionalValue: number;
+  sequence: string;
+  txHash: string;
+};
