@@ -130,7 +130,7 @@ class WormScanSDK {
     sortOrder,
   }: IGovernorMaxAvailableNotionalInput) {
     return this.request<IGovernorMaxAvailableNotional>(
-      `governor/notional/max_available/${chainId}`,
+      `/governor/notional/max_available/${chainId}`,
       {
         params: { page, pageSize, sortOrder },
       },
@@ -145,7 +145,7 @@ class WormScanSDK {
     pageSize,
     sortOrder,
   }: IGovernorAvailableNotionalInput) {
-    return this.request<IGovernorAvailableNotional>("governor/notional/available", {
+    return this.request<IGovernorAvailableNotional>("/governor/notional/available", {
       params: { page, pageSize, sortOrder },
     });
   }
@@ -160,7 +160,7 @@ class WormScanSDK {
     sortOrder,
   }: IGovernorAvailableNotionalByChainIdInput) {
     return this.request<IGovernorAvailableNotionalByChainId>(
-      `governor/notional/available/${chainId}`,
+      `/governor/notional/available/${chainId}`,
       {
         params: { page, pageSize, sortOrder },
       },
@@ -175,7 +175,7 @@ class WormScanSDK {
     pageSize,
     sortOrder,
   }: IGovernorLimitNotionalInput) {
-    return this.request<IGovernorLimitNotional>("governor/notional/limit", {
+    return this.request<IGovernorLimitNotional>("/governor/notional/limit", {
       params: { page, pageSize, sortOrder },
     });
   }
@@ -189,7 +189,7 @@ class WormScanSDK {
     pageSize,
     sortOrder,
   }: IGovernorLimitNotionalByChainIdInput) {
-    return this.request<IGovernorLimitNotionalByChainId>(`governor/notional/limit/${chainId}`, {
+    return this.request<IGovernorLimitNotionalByChainId>(`/governor/notional/limit/${chainId}`, {
       params: { page, pageSize, sortOrder },
     });
   }
