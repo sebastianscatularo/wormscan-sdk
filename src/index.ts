@@ -6,6 +6,8 @@ import {
   IGovernorsEnqueuedVaasInput,
   IGovernorsEnqueuedVaas,
   IGovernorEnqueuedVaasByChainId,
+  IGovernorsLimitInput,
+  IGovernorsLimit,
 } from "./interfaces";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -93,6 +95,15 @@ class WormScanSDK {
     sortOrder,
   }: { chainId: string } & IGovernorsEnqueuedVaasInput) {
     return this.request<IGovernorEnqueuedVaasByChainId>(`/governor/enqueued_vaas/${chainId}`, {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns the governor limit for all blockchains.
+   */
+  public async getGovernorsLimit({ page, pageSize, sortOrder }: IGovernorsLimitInput) {
+    return this.request<IGovernorsLimit>("/governor/limit", {
       params: { page, pageSize, sortOrder },
     });
   }
