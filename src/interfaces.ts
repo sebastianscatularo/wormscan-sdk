@@ -19,7 +19,7 @@ export interface IGovernorsConfiguration {
 }
 
 export interface IGovernorsConfigurationByGuardianIdInput extends TSortOptions {
-  guardianId: number;
+  guardianId: string;
 }
 
 export interface IGovernorsConfigurationByGuardianId {
