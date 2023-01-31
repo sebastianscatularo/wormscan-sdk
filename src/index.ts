@@ -251,7 +251,14 @@ class WormScanSDK {
    * Returns all the VAAs generated in a specific blockchain, optionally in a
    *   specific emitter and optionally with a specific hash id.
    */
-  public async findVAA({ chainId, emitter, specific, page, pageSize, sortOrder }: IVAAInput) {
+  public async getSpecificVAA({
+    chainId,
+    emitter,
+    specific,
+    page,
+    pageSize,
+    sortOrder,
+  }: IVAAInput) {
     let path = `/vaas/${chainId}`;
     if (emitter) {
       path = `${path}/${emitter}`;
