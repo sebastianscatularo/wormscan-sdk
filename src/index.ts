@@ -24,6 +24,11 @@ import {
   IGovernorStatus,
   IGovernorStatusByGuardianIdInput,
   IGovernorStatusByGuardianId,
+  IVAAsInput,
+  IVAAs,
+  IVAAsCount,
+  IVAAInput,
+  IVAA,
 } from "./interfaces";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -58,6 +63,13 @@ class WormScanSDK {
    */
   public async checkHealth() {
     return this.request<IHealth>("/health");
+  }
+
+  /**
+   * Ready check.
+   */
+  public async checkReady() {
+    return this.request<IHealth>("/ready");
   }
 
   /**
@@ -217,6 +229,46 @@ class WormScanSDK {
     sortOrder,
   }: IGovernorStatusByGuardianIdInput) {
     return this.request<IGovernorStatusByGuardianId>(`/governor/status/${guardianId}`, {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns all VAAs. Output is paginated and can also be be sorted.
+   */
+  public async getVAAs({ page, pageSize, sortOrder }: IVAAsInput) {
+    return this.request<IVAAs>("/vaas", { params: { page, pageSize, sortOrder } });
+  }
+
+  /**
+   * Returns the total number of VAAs emitted for each blockchain.
+   */
+  public async getVAAsCount() {
+    return this.request<IVAAsCount>("/vaas/vaa-counts");
+  }
+
+  /**
+   * Returns all the VAAs generated in a specific blockchain, optionally in a
+   *   specific emitter and optionally with a specific hash id.
+   */
+  public async getSpecificVAA({
+    chainId,
+    emitter,
+    specific,
+    page,
+    pageSize,
+    sortOrder,
+  }: IVAAInput) {
+    let path = `/vaas/${chainId}`;
+    if (emitter) {
+      path = `${path}/${emitter}`;
+
+      if (specific) {
+        const { sequence, signer, hash } = specific;
+        path = `${path}/${sequence}/${signer}/${hash}`;
+      }
+    }
+    return this.request<IVAA>(path, {
       params: { page, pageSize, sortOrder },
     });
   }
