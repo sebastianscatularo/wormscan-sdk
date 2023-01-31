@@ -8,6 +8,18 @@ import {
   IGovernorEnqueuedVaasByChainId,
   IGovernorsLimitInput,
   IGovernorsLimit,
+  IGovernorMaxAvailableNotionalInput,
+  IGovernorMaxAvailableNotional,
+  IGovernorAvailableNotionalInput,
+  IGovernorAvailableNotional,
+  IGovernorAvailableNotionalByChainIdInput,
+  IGovernorAvailableNotionalByChainId,
+  IGovernorLimitNotionalInput,
+  IGovernorLimitNotionalByChainIdInput,
+  IGovernorLimitNotionalByChainId,
+  IGovernorLimitNotional,
+  IGovernorsConfigurationByGuardianIdInput,
+  IGovernorsEnqueuedVaasByChainIdInput,
 } from "./interfaces";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -66,7 +78,7 @@ class WormScanSDK {
     page,
     pageSize,
     sortOrder,
-  }: { guardianId: string } & IGovernorsConfigurationInput) {
+  }: IGovernorsConfigurationByGuardianIdInput) {
     return this.request<IGovernorsConfigurationByGuardianId>(`/governor/config/${guardianId}`, {
       params: { page, pageSize, sortOrder },
     });
@@ -93,7 +105,7 @@ class WormScanSDK {
     page,
     pageSize,
     sortOrder,
-  }: { chainId: string } & IGovernorsEnqueuedVaasInput) {
+  }: IGovernorsEnqueuedVaasByChainIdInput) {
     return this.request<IGovernorEnqueuedVaasByChainId>(`/governor/enqueued_vaas/${chainId}`, {
       params: { page, pageSize, sortOrder },
     });
@@ -104,6 +116,80 @@ class WormScanSDK {
    */
   public async getGovernorsLimit({ page, pageSize, sortOrder }: IGovernorsLimitInput) {
     return this.request<IGovernorsLimit>("/governor/limit", {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns the maximum amount of notional value available for a given blockchain.
+   */
+  public async getGovernorsMaxAvailableNotionalByChainId({
+    chainId,
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorMaxAvailableNotionalInput) {
+    return this.request<IGovernorMaxAvailableNotional>(
+      `/governor/notional/max_available/${chainId}`,
+      {
+        params: { page, pageSize, sortOrder },
+      },
+    );
+  }
+
+  /**
+   * Returns the amount of notional value available for each blockchain.
+   */
+  public async getGovernorsAvailableNotional({
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorAvailableNotionalInput) {
+    return this.request<IGovernorAvailableNotional>("/governor/notional/available", {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns the amount of notional value available for a given blockchain.
+   */
+  public async getGovernorsAvailableNotionalByChainId({
+    chainId,
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorAvailableNotionalByChainIdInput) {
+    return this.request<IGovernorAvailableNotionalByChainId>(
+      `/governor/notional/available/${chainId}`,
+      {
+        params: { page, pageSize, sortOrder },
+      },
+    );
+  }
+
+  /**
+   * Returns the detailed notional limit for all blockchains.
+   */
+  public async getGovernorsLimitNotional({
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorLimitNotionalInput) {
+    return this.request<IGovernorLimitNotional>("/governor/notional/limit", {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns the detailed notional limit available for a given blockchain.
+   */
+  public async getGovernorsLimitNotionalByChainId({
+    chainId,
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorLimitNotionalByChainIdInput) {
+    return this.request<IGovernorLimitNotionalByChainId>(`/governor/notional/limit/${chainId}`, {
       params: { page, pageSize, sortOrder },
     });
   }
