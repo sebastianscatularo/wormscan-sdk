@@ -104,7 +104,7 @@ class WormScanSDK {
   /**
    * Returns all enqueued VAAs for a given blockchain.
    */
-  public async getGovernorsEnqueuedVaasByChainId({
+  public async getGovernorEnqueuedVaasByChainId({
     chainId,
     page,
     pageSize,
@@ -127,7 +127,7 @@ class WormScanSDK {
   /**
    * Returns the maximum amount of notional value available for a given blockchain.
    */
-  public async getGovernorsMaxAvailableNotionalByChainId({
+  public async getGovernorMaxAvailableNotionalByChainId({
     chainId,
     page,
     pageSize,
@@ -157,7 +157,7 @@ class WormScanSDK {
   /**
    * Returns the amount of notional value available for a given blockchain.
    */
-  public async getGovernorsAvailableNotionalByChainId({
+  public async getGovernorAvailableNotionalByChainId({
     chainId,
     page,
     pageSize,
@@ -187,7 +187,7 @@ class WormScanSDK {
   /**
    * Returns the detailed notional limit available for a given blockchain.
    */
-  public async getGovernorsLimitNotionalByChainId({
+  public async getGovernorLimitNotionalByChainId({
     chainId,
     page,
     pageSize,
@@ -210,7 +210,7 @@ class WormScanSDK {
   /**
    * Returns the governor status for a given guardian.
    */
-  public async getGovernorsStatusByGuardianId({
+  public async getGovernorStatusByGuardianId({
     guardianId,
     page,
     pageSize,
