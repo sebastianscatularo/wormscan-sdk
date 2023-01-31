@@ -29,6 +29,10 @@ import {
   IVAAsCount,
   IVAAInput,
   IVAA,
+  IObservationsInput,
+  IObservations,
+  IObservationInput,
+  IObservation,
 } from "./interfaces";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -249,7 +253,7 @@ class WormScanSDK {
 
   /**
    * Returns all the VAAs generated in a specific blockchain, optionally in a
-   *   specific emitter and optionally with a specific hash id.
+   * specific emitter and optionally with a specific hash id.
    */
   public async getSpecificVAA({
     chainId,
@@ -259,7 +263,7 @@ class WormScanSDK {
     pageSize,
     sortOrder,
   }: IVAAInput) {
-    let path = `/vaas/${chainId}`;
+    let path: string = `/vaas/${chainId}`;
     if (emitter) {
       path = `${path}/${emitter}`;
 
@@ -269,6 +273,46 @@ class WormScanSDK {
       }
     }
     return this.request<IVAA>(path, {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns all observations.
+   */
+  public async getObservations({ page, pageSize, sortOrder }: IObservationsInput) {
+    return this.request<IObservations>("/observations", {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Find a specific observation.
+   */
+  public async getObservation({
+    chainId,
+    emitter,
+    sequence,
+    specific,
+    page,
+    pageSize,
+    sortOrder,
+  }: IObservationInput) {
+    let path: string = `/observations/${chainId}`;
+    if (emitter) {
+      path = `${path}/${emitter}`;
+
+      if (sequence) {
+        path = `${path}/${sequence}`;
+
+        if (specific) {
+          const { signer, hash } = specific;
+          path = `${path}/${signer}/${hash}`;
+        }
+      }
+    }
+
+    return this.request<IObservation>(path, {
       params: { page, pageSize, sortOrder },
     });
   }
