@@ -12,21 +12,6 @@ export interface IHealth {
   status: string;
 }
 
-export interface IGovernorsConfigurationInput extends TSortOptions {}
-export interface IGovernorsConfiguration {
-  data: TGovernorConfiguration[];
-  pagination: Pagination;
-}
-
-export interface IGovernorsConfigurationByGuardianIdInput extends TSortOptions {
-  guardianId: string;
-}
-
-export interface IGovernorsConfigurationByGuardianId {
-  data: TGovernorConfiguration;
-  pagination: Pagination;
-}
-
 type TGovernorConfiguration = {
   id: string;
   createdAt: Date;
@@ -43,6 +28,29 @@ type TGovernorConfiguration = {
     originaddress: string;
     price: number;
   }[];
+};
+
+export interface IGovernorsConfigurationInput extends TSortOptions {}
+export interface IGovernorsConfiguration {
+  data: TGovernorConfiguration[];
+  pagination: Pagination;
+}
+
+export interface IGovernorsConfigurationByGuardianIdInput extends TSortOptions {
+  guardianId: string;
+}
+
+export interface IGovernorsConfigurationByGuardianId {
+  data: TGovernorConfiguration;
+  pagination: Pagination;
+}
+
+type TGovernorEnqueuedVaas = {
+  chainId: number;
+  emitterAddress: string;
+  notionalValue: number;
+  sequence: string;
+  txHash: string;
 };
 
 export interface IGovernorsEnqueuedVaasInput extends TSortOptions {}
@@ -63,14 +71,6 @@ export interface IGovernorEnqueuedVaasByChainId {
   data: TGovernorEnqueuedVaas[];
   pagination: Pagination;
 }
-
-type TGovernorEnqueuedVaas = {
-  chainId: number;
-  emitterAddress: string;
-  notionalValue: number;
-  sequence: string;
-  txHash: string;
-};
 
 export interface IGovernorsLimitInput extends TSortOptions {}
 
@@ -105,6 +105,15 @@ export interface IGovernorMaxAvailableNotional {
   pagination: Pagination;
 }
 
+type TGovernorAvailableNotional = {
+  availableNotional: number;
+  chainId: number;
+  createdAt?: string;
+  id?: string;
+  nodeName?: string;
+  updatedAt?: string;
+};
+
 export interface IGovernorAvailableNotionalInput extends TSortOptions {}
 
 export interface IGovernorAvailableNotional {
@@ -121,13 +130,14 @@ export interface IGovernorAvailableNotionalByChainId {
   pagination: Pagination;
 }
 
-type TGovernorAvailableNotional = {
-  availableNotional: number;
+type TGovernorLimitNotional = {
   chainId: number;
-  createdAt?: string;
-  id?: string;
-  nodeName?: string;
-  updatedAt?: string;
+  createdAt: string;
+  id: string;
+  maxTransactionSize: number;
+  nodename: string;
+  notionalLimit: number;
+  updatedAt: string;
 };
 
 export interface IGovernorLimitNotionalInput extends TSortOptions {}
@@ -145,13 +155,3 @@ export interface IGovernorLimitNotionalByChainId {
   data: TGovernorLimitNotional[];
   pagination: Pagination;
 }
-
-type TGovernorLimitNotional = {
-  chainId: number;
-  createdAt: string;
-  id: string;
-  maxTransactionSize: number;
-  nodename: string;
-  notionalLimit: number;
-  updatedAt: string;
-};
