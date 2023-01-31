@@ -155,3 +155,35 @@ export interface IGovernorLimitNotionalByChainId {
   data: TGovernorLimitNotional[];
   pagination: Pagination;
 }
+
+type TGovernorStatus = {
+  chains: {
+    chainid: number;
+    emitters: {
+      emitteraddress: string;
+      enqueuedvaas: string;
+      totalenqueuedvaas: number;
+    }[];
+    remainingavailablenotional: number;
+  }[];
+  createdAt: string;
+  id: string;
+  nodename: string;
+  updatedAt: string;
+};
+
+export interface IGovernorStatusInput extends TSortOptions {}
+
+export interface IGovernorStatus {
+  data: TGovernorStatus[];
+  pagination: Pagination;
+}
+
+export interface IGovernorStatusByGuardianIdInput extends TSortOptions {
+  guardianId: string;
+}
+
+export interface IGovernorStatusByGuardianId {
+  data: TGovernorStatus;
+  pagination: Pagination;
+}

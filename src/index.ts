@@ -20,6 +20,10 @@ import {
   IGovernorLimitNotional,
   IGovernorsConfigurationByGuardianIdInput,
   IGovernorsEnqueuedVaasByChainIdInput,
+  IGovernorStatusInput,
+  IGovernorStatus,
+  IGovernorStatusByGuardianIdInput,
+  IGovernorStatusByGuardianId,
 } from "./interfaces";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -100,7 +104,7 @@ class WormScanSDK {
   /**
    * Returns all enqueued VAAs for a given blockchain.
    */
-  public async getGovernorsEnqueuedVaasByChainId({
+  public async getGovernorEnqueuedVaasByChainId({
     chainId,
     page,
     pageSize,
@@ -123,7 +127,7 @@ class WormScanSDK {
   /**
    * Returns the maximum amount of notional value available for a given blockchain.
    */
-  public async getGovernorsMaxAvailableNotionalByChainId({
+  public async getGovernorMaxAvailableNotionalByChainId({
     chainId,
     page,
     pageSize,
@@ -153,7 +157,7 @@ class WormScanSDK {
   /**
    * Returns the amount of notional value available for a given blockchain.
    */
-  public async getGovernorsAvailableNotionalByChainId({
+  public async getGovernorAvailableNotionalByChainId({
     chainId,
     page,
     pageSize,
@@ -183,13 +187,36 @@ class WormScanSDK {
   /**
    * Returns the detailed notional limit available for a given blockchain.
    */
-  public async getGovernorsLimitNotionalByChainId({
+  public async getGovernorLimitNotionalByChainId({
     chainId,
     page,
     pageSize,
     sortOrder,
   }: IGovernorLimitNotionalByChainIdInput) {
     return this.request<IGovernorLimitNotionalByChainId>(`/governor/notional/limit/${chainId}`, {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns the governor status for all guardians.
+   */
+  public async getGovernorsStatus({ page, pageSize, sortOrder }: IGovernorStatusInput) {
+    return this.request<IGovernorStatus>("/governor/status", {
+      params: { page, pageSize, sortOrder },
+    });
+  }
+
+  /**
+   * Returns the governor status for a given guardian.
+   */
+  public async getGovernorStatusByGuardianId({
+    guardianId,
+    page,
+    pageSize,
+    sortOrder,
+  }: IGovernorStatusByGuardianIdInput) {
+    return this.request<IGovernorStatusByGuardianId>(`/governor/status/${guardianId}`, {
       params: { page, pageSize, sortOrder },
     });
   }
