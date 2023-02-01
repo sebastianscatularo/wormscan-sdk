@@ -219,15 +219,23 @@ export interface IVAAsCount {
   pagination: Pagination;
 }
 
-export interface IVAAInput extends TSortOptions {
-  chainId: number;
-  emitter?: string;
-  specific?: {
-    sequence: number;
-    signer: string;
-    hash: string;
-  };
-}
+type IVAAInputs =
+  | {
+      chainId: number;
+      emitter?: undefined;
+      specific?: undefined;
+    }
+  | {
+      chainId: number;
+      emitter: string;
+      specific?: {
+        sequence: number;
+        signer: string;
+        hash: string;
+      };
+    };
+
+export type IVAAInput = IVAAInputs & TSortOptions;
 
 export interface IVAA {
   data: TVAA[];
