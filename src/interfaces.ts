@@ -277,13 +277,7 @@ type TObservationsInputs =
       chainId: number;
       emitter: string;
       sequence: number;
-      specific?: undefined;
-    }
-  | {
-      chainId: number;
-      emitter: string;
-      sequence: number;
-      specific: {
+      specific?: {
         signer: string;
         hash: string;
       };
