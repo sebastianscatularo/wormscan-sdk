@@ -233,3 +233,33 @@ export interface IVAA {
   data: TVAA[];
   pagination: Pagination;
 }
+
+type TObservation = {
+  emitterAddr: string;
+  emitterChain: number;
+  guardianAddr: string;
+  hash: number[];
+  id: string;
+  indexedAt: string;
+  sequence: string;
+  signature: number[];
+  txHash: number[];
+  updatedAt: string;
+  version: number;
+};
+
+export interface IObservationsInput extends TSortOptions {}
+
+export type IObservations = IObservation[];
+
+export interface IObservationInput extends TSortOptions {
+  chainId: number;
+  emitter?: string;
+  sequence?: number;
+  specific?: {
+    signer: string;
+    hash: string;
+  };
+}
+
+export type IObservation = TObservation[];
