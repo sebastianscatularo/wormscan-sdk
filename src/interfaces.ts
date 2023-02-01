@@ -260,14 +260,35 @@ export interface IObservationsInput extends TSortOptions {}
 
 export type IObservations = IObservation[];
 
-export interface IObservationInput extends TSortOptions {
-  chainId: number;
-  emitter?: string;
-  sequence?: number;
-  specific?: {
-    signer: string;
-    hash: string;
-  };
-}
+type TObservationsInputs =
+  | {
+      chainId: number;
+      emitter?: undefined;
+      sequence?: undefined;
+      specific?: undefined;
+    }
+  | {
+      chainId: number;
+      emitter: string;
+      sequence?: undefined;
+      specific?: undefined;
+    }
+  | {
+      chainId: number;
+      emitter: string;
+      sequence: number;
+      specific?: undefined;
+    }
+  | {
+      chainId: number;
+      emitter: string;
+      sequence: number;
+      specific: {
+        signer: string;
+        hash: string;
+      };
+    };
+
+export type IObservationInput = TObservationsInputs & TSortOptions;
 
 export type IObservation = TObservation[];
