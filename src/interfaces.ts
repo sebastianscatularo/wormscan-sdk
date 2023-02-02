@@ -188,60 +188,6 @@ export interface IGovernorStatusByGuardianId {
   pagination: Pagination;
 }
 
-type TVAA = {
-  emitterAddr: string;
-  emitterChain: number;
-  guardianSetIndex: number;
-  id: string;
-  indexedAt: string;
-  sequence?: number;
-  timestamp: string;
-  txHash?: string;
-  updatedAt: string;
-  vaa: string;
-  version: number;
-};
-
-type TVAACount = {
-  chainId: number;
-  count: number;
-};
-
-export interface IVAAsInput extends TSortOptions {}
-
-export interface IVAAs {
-  data: TVAA[];
-  pagination: Pagination;
-}
-
-export interface IVAAsCount {
-  data: TVAACount[];
-  pagination: Pagination;
-}
-
-type IVAAInputs =
-  | {
-      chainId: number;
-      emitter?: undefined;
-      specific?: undefined;
-    }
-  | {
-      chainId: number;
-      emitter: string;
-      specific?: {
-        sequence: number;
-        signer: string;
-        hash: string;
-      };
-    };
-
-export type IVAAInput = IVAAInputs & TSortOptions;
-
-export interface IVAA {
-  data: TVAA[];
-  pagination: Pagination;
-}
-
 type TObservation = {
   emitterAddr: string;
   emitterChain: number;
@@ -284,5 +230,42 @@ type TObservationsInputs =
     };
 
 export type IObservationInput = TObservationsInputs & TSortOptions;
+export type IVAAInput = TObservationsInputs & TSortOptions;
 
 export type IObservation = TObservation[];
+
+type TVAA = {
+  emitterAddr: string;
+  emitterChain: number;
+  guardianSetIndex: number;
+  id: string;
+  indexedAt: string;
+  sequence?: number;
+  timestamp: string;
+  txHash?: string;
+  updatedAt: string;
+  vaa: string;
+  version: number;
+};
+
+type TVAACount = {
+  chainId: number;
+  count: number;
+};
+
+export interface IVAAsInput extends TSortOptions {}
+
+export interface IVAAs {
+  data: TVAA[];
+  pagination: Pagination;
+}
+
+export interface IVAAsCount {
+  data: TVAACount[];
+  pagination: Pagination;
+}
+
+export interface IVAA {
+  data: TVAA[];
+  pagination: Pagination;
+}

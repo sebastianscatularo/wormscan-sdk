@@ -258,6 +258,7 @@ class WormScanSDK {
   public async getSpecificVAA({
     chainId,
     emitter,
+    sequence,
     specific,
     page,
     pageSize,
@@ -267,9 +268,13 @@ class WormScanSDK {
     if (emitter) {
       path = `${path}/${emitter}`;
 
-      if (specific) {
-        const { sequence, signer, hash } = specific;
-        path = `${path}/${sequence}/${signer}/${hash}`;
+      if (sequence) {
+        path = `${path}/${sequence}`;
+
+        if (specific) {
+          const { signer, hash } = specific;
+          path = `${path}/${signer}/${hash}`;
+        }
       }
     }
     return this.request<IVAA>(path, {
