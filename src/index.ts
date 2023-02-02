@@ -324,3 +324,4 @@ class WormScanSDK {
 }
 
 export default WormScanSDK;
+export * from "./chainIds";
