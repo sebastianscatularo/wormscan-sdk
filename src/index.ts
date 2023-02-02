@@ -324,4 +324,4 @@ class WormScanSDK {
 }
 
 export default WormScanSDK;
-export { ChainsID } from "./interfaces";
+export * from "./chainIds";
