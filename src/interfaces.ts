@@ -1,3 +1,34 @@
+export enum ChainsID {
+  Unset = 0,
+  Solana = 1,
+  Ethereum = 2,
+  Terra = 3,
+  BSC = 4,
+  Polygon = 5,
+  Avalanche = 6,
+  Oasis = 7,
+  Algorand = 8,
+  Aurora = 9,
+  Fantom = 10,
+  Karura = 11,
+  Acala = 12,
+  Klaytn = 13,
+  Celo = 14,
+  Near = 15,
+  Moonbeam = 16,
+  Neon = 17,
+  Terra2 = 18,
+  Injective = 19,
+  Sui = 21,
+  Aptos = 22,
+  Arbitrum = 23,
+  Optimism = 24,
+  PythNet = 26,
+  Xpla = 28,
+  Btc = 29,
+  Wormchain = 3104,
+}
+
 type TSortOptions = {
   page?: number;
   pageSize?: number;
@@ -19,12 +50,12 @@ type TGovernorConfiguration = {
   nodename: string;
   counter: number;
   chains: {
-    chainid: number;
+    chainid: ChainsID;
     notionallimit: number;
     bigtransactionsize: number;
   }[];
   tokens: {
-    originchainid: number;
+    originchainid: ChainsID;
     originaddress: string;
     price: number;
   }[];
@@ -46,7 +77,7 @@ export interface IGovernorsConfigurationByGuardianId {
 }
 
 type TGovernorEnqueuedVaas = {
-  chainId: number;
+  chainId: ChainsID;
   emitterAddress: string;
   notionalValue: number;
   sequence: string;
@@ -57,14 +88,14 @@ export interface IGovernorsEnqueuedVaasInput extends TSortOptions {}
 
 export interface IGovernorsEnqueuedVaas {
   data: {
-    chainId: number;
+    chainId: ChainsID;
     enqueuedVaas: TGovernorEnqueuedVaas[];
   }[];
   pagination: Pagination;
 }
 
 export interface IGovernorsEnqueuedVaasByChainIdInput extends TSortOptions {
-  chainId: number;
+  chainId: ChainsID;
 }
 
 export interface IGovernorEnqueuedVaasByChainId {
@@ -77,7 +108,7 @@ export interface IGovernorsLimitInput extends TSortOptions {}
 export interface IGovernorsLimit {
   data: {
     availableNotional: number;
-    chainId: number;
+    chainId: ChainsID;
     maxTransactionSize: number;
     notionalLimit: number;
   }[];
@@ -85,13 +116,13 @@ export interface IGovernorsLimit {
 }
 
 export interface IGovernorMaxAvailableNotionalInput extends TSortOptions {
-  chainId: number;
+  chainId: ChainsID;
 }
 
 export interface IGovernorMaxAvailableNotional {
   data: {
     availableNotional: number;
-    chainId: number;
+    chainId: ChainsID;
     createdAt: string;
     emitters: {
       emitterAddress: string;
@@ -107,7 +138,7 @@ export interface IGovernorMaxAvailableNotional {
 
 type TGovernorAvailableNotional = {
   availableNotional: number;
-  chainId: number;
+  chainId: ChainsID;
   createdAt?: string;
   id?: string;
   nodeName?: string;
@@ -122,7 +153,7 @@ export interface IGovernorAvailableNotional {
 }
 
 export interface IGovernorAvailableNotionalByChainIdInput extends TSortOptions {
-  chainId: number;
+  chainId: ChainsID;
 }
 
 export interface IGovernorAvailableNotionalByChainId {
@@ -131,7 +162,7 @@ export interface IGovernorAvailableNotionalByChainId {
 }
 
 type TGovernorLimitNotional = {
-  chainId: number;
+  chainId: ChainsID;
   createdAt: string;
   id: string;
   maxTransactionSize: number;
@@ -148,7 +179,7 @@ export interface IGovernorLimitNotional {
 }
 
 export interface IGovernorLimitNotionalByChainIdInput extends TSortOptions {
-  chainId: number;
+  chainId: ChainsID;
 }
 
 export interface IGovernorLimitNotionalByChainId {
@@ -158,7 +189,7 @@ export interface IGovernorLimitNotionalByChainId {
 
 type TGovernorStatus = {
   chains: {
-    chainid: number;
+    chainid: ChainsID;
     emitters: {
       emitteraddress: string;
       enqueuedvaas: string;
@@ -208,19 +239,19 @@ export type IObservations = IObservation[];
 
 type TObservationsInputs =
   | {
-      chainId: number;
+      chainId: ChainsID;
       emitter?: undefined;
       sequence?: undefined;
       specific?: undefined;
     }
   | {
-      chainId: number;
+      chainId: ChainsID;
       emitter: string;
       sequence?: undefined;
       specific?: undefined;
     }
   | {
-      chainId: number;
+      chainId: ChainsID;
       emitter: string;
       sequence: number;
       specific?: {
@@ -249,7 +280,7 @@ type TVAA = {
 };
 
 type TVAACount = {
-  chainId: number;
+  chainId: ChainsID;
   count: number;
 };
 
