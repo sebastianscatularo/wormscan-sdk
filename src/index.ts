@@ -3,9 +3,9 @@ import {
   IGovernorsConfigurationInput,
   IGovernorsConfiguration,
   IGovernorsConfigurationByGuardianId,
-  IGovernorsEnqueuedVaasInput,
-  IGovernorsEnqueuedVaas,
-  IGovernorEnqueuedVaasByChainId,
+  IGovernorsEnqueuedVAAsInput,
+  IGovernorsEnqueuedVAAs,
+  IGovernorEnqueuedVAAsByChainId,
   IGovernorsLimitInput,
   IGovernorsLimit,
   IGovernorMaxAvailableNotionalInput,
@@ -19,7 +19,7 @@ import {
   IGovernorLimitNotionalByChainId,
   IGovernorLimitNotional,
   IGovernorsConfigurationByGuardianIdInput,
-  IGovernorsEnqueuedVaasByChainIdInput,
+  IGovernorsEnqueuedVAAsByChainIdInput,
   IGovernorStatusInput,
   IGovernorStatus,
   IGovernorStatusByGuardianIdInput,
@@ -107,12 +107,12 @@ class WormScanSDK {
   /**
    * Returns enqueued VAAs for each blockchain.
    */
-  public async getGovernorsEnqueuedVaas({
+  public async getGovernorsEnqueuedVAAs({
     page,
     pageSize,
     sortOrder,
-  }: IGovernorsEnqueuedVaasInput) {
-    return this.request<IGovernorsEnqueuedVaas>("/governor/enqueued_vaas", {
+  }: IGovernorsEnqueuedVAAsInput) {
+    return this.request<IGovernorsEnqueuedVAAs>("/governor/enqueued_vaas", {
       params: { page, pageSize, sortOrder },
     });
   }
@@ -120,13 +120,13 @@ class WormScanSDK {
   /**
    * Returns all enqueued VAAs for a given blockchain.
    */
-  public async getGovernorEnqueuedVaasByChainId({
+  public async getGovernorEnqueuedVAAsByChainId({
     chainId,
     page,
     pageSize,
     sortOrder,
-  }: IGovernorsEnqueuedVaasByChainIdInput) {
-    return this.request<IGovernorEnqueuedVaasByChainId>(`/governor/enqueued_vaas/${chainId}`, {
+  }: IGovernorsEnqueuedVAAsByChainIdInput) {
+    return this.request<IGovernorEnqueuedVAAsByChainId>(`/governor/enqueued_vaas/${chainId}`, {
       params: { page, pageSize, sortOrder },
     });
   }
@@ -255,7 +255,7 @@ class WormScanSDK {
    * Returns all the VAAs generated in a specific blockchain, optionally in a
    * specific emitter and optionally with a specific hash id.
    */
-  public async getSpecificVAA({
+  public async getVAA({
     chainId,
     emitter,
     sequence,
@@ -324,4 +324,16 @@ class WormScanSDK {
 }
 
 export default WormScanSDK;
+
 export * from "./chainIds";
+export type {
+  TGovernorConfiguration,
+  TGovernorsEnqueuedVAAs,
+  TGovernorEnqueuedVAAs,
+  TGovernorsLimit,
+  TGovernorAvailableNotional,
+  TGovernorLimitNotional,
+  TGovernorStatus,
+  TVAA,
+  TVAACount,
+} from "./interfaces";

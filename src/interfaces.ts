@@ -14,7 +14,7 @@ export interface IHealth {
   status: string;
 }
 
-type TGovernorConfiguration = {
+export type TGovernorConfiguration = {
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -41,55 +41,53 @@ export interface IGovernorsConfiguration {
 export interface IGovernorsConfigurationByGuardianIdInput extends TSortOptions {
   guardianId: string;
 }
-
 export interface IGovernorsConfigurationByGuardianId {
   data: TGovernorConfiguration;
   pagination: Pagination;
 }
 
-type TGovernorEnqueuedVaas = {
+export type TGovernorEnqueuedVAAs = {
   chainId: ChainID;
   emitterAddress: string;
   notionalValue: number;
   sequence: string;
   txHash: string;
 };
+export type TGovernorsEnqueuedVAAs = {
+  chainId: ChainID;
+  enqueuedVAAs: TGovernorEnqueuedVAAs[];
+};
 
-export interface IGovernorsEnqueuedVaasInput extends TSortOptions {}
-
-export interface IGovernorsEnqueuedVaas {
-  data: {
-    chainId: ChainID;
-    enqueuedVaas: TGovernorEnqueuedVaas[];
-  }[];
+export interface IGovernorsEnqueuedVAAsInput extends TSortOptions {}
+export interface IGovernorsEnqueuedVAAs {
+  data: TGovernorsEnqueuedVAAs[];
   pagination: Pagination;
 }
 
-export interface IGovernorsEnqueuedVaasByChainIdInput extends TSortOptions {
+export interface IGovernorsEnqueuedVAAsByChainIdInput extends TSortOptions {
   chainId: ChainID;
 }
-
-export interface IGovernorEnqueuedVaasByChainId {
-  data: TGovernorEnqueuedVaas[];
+export interface IGovernorEnqueuedVAAsByChainId {
+  data: TGovernorEnqueuedVAAs[];
   pagination: Pagination;
 }
 
-export interface IGovernorsLimitInput extends TSortOptions {}
+export type TGovernorsLimit = {
+  availableNotional: number;
+  chainId: ChainID;
+  maxTransactionSize: number;
+  notionalLimit: number;
+};
 
+export interface IGovernorsLimitInput extends TSortOptions {}
 export interface IGovernorsLimit {
-  data: {
-    availableNotional: number;
-    chainId: ChainID;
-    maxTransactionSize: number;
-    notionalLimit: number;
-  }[];
+  data: TGovernorsLimit[];
   pagination: Pagination;
 }
 
 export interface IGovernorMaxAvailableNotionalInput extends TSortOptions {
   chainId: ChainID;
 }
-
 export interface IGovernorMaxAvailableNotional {
   data: {
     availableNotional: number;
@@ -97,8 +95,8 @@ export interface IGovernorMaxAvailableNotional {
     createdAt: string;
     emitters: {
       emitterAddress: string;
-      enqueuedVaas: number;
-      totalEnqueuedVaas: number;
+      enqueuedVAAs: number;
+      totalEnqueuedVAAs: number;
     }[];
     id: string;
     nodeName: string;
@@ -107,7 +105,7 @@ export interface IGovernorMaxAvailableNotional {
   pagination: Pagination;
 }
 
-type TGovernorAvailableNotional = {
+export type TGovernorAvailableNotional = {
   availableNotional: number;
   chainId: ChainID;
   createdAt?: string;
@@ -117,7 +115,6 @@ type TGovernorAvailableNotional = {
 };
 
 export interface IGovernorAvailableNotionalInput extends TSortOptions {}
-
 export interface IGovernorAvailableNotional {
   data: TGovernorAvailableNotional[];
   pagination: Pagination;
@@ -126,13 +123,12 @@ export interface IGovernorAvailableNotional {
 export interface IGovernorAvailableNotionalByChainIdInput extends TSortOptions {
   chainId: ChainID;
 }
-
 export interface IGovernorAvailableNotionalByChainId {
   data: TGovernorAvailableNotional[];
   pagination: Pagination;
 }
 
-type TGovernorLimitNotional = {
+export type TGovernorLimitNotional = {
   chainId: ChainID;
   createdAt: string;
   id: string;
@@ -143,7 +139,6 @@ type TGovernorLimitNotional = {
 };
 
 export interface IGovernorLimitNotionalInput extends TSortOptions {}
-
 export interface IGovernorLimitNotional {
   data: TGovernorLimitNotional[];
   pagination: Pagination;
@@ -152,19 +147,18 @@ export interface IGovernorLimitNotional {
 export interface IGovernorLimitNotionalByChainIdInput extends TSortOptions {
   chainId: ChainID;
 }
-
 export interface IGovernorLimitNotionalByChainId {
   data: TGovernorLimitNotional[];
   pagination: Pagination;
 }
 
-type TGovernorStatus = {
+export type TGovernorStatus = {
   chains: {
     chainid: ChainID;
     emitters: {
       emitteraddress: string;
-      enqueuedvaas: string;
-      totalenqueuedvaas: number;
+      enqueuedVAAs: string;
+      totalenqueuedVAAs: number;
     }[];
     remainingavailablenotional: number;
   }[];
@@ -175,7 +169,6 @@ type TGovernorStatus = {
 };
 
 export interface IGovernorStatusInput extends TSortOptions {}
-
 export interface IGovernorStatus {
   data: TGovernorStatus[];
   pagination: Pagination;
@@ -184,13 +177,12 @@ export interface IGovernorStatus {
 export interface IGovernorStatusByGuardianIdInput extends TSortOptions {
   guardianId: string;
 }
-
 export interface IGovernorStatusByGuardianId {
   data: TGovernorStatus;
   pagination: Pagination;
 }
 
-type TObservation = {
+export type TObservation = {
   emitterAddr: string;
   emitterChain: number;
   guardianAddr: string;
@@ -205,7 +197,7 @@ type TObservation = {
 };
 
 export interface IObservationsInput extends TSortOptions {}
-
+export type IObservation = TObservation[];
 export type IObservations = IObservation[];
 
 type TObservationsInputs =
@@ -234,9 +226,7 @@ type TObservationsInputs =
 export type IObservationInput = TObservationsInputs & TSortOptions;
 export type IVAAInput = TObservationsInputs & TSortOptions;
 
-export type IObservation = TObservation[];
-
-type TVAA = {
+export type TVAA = {
   emitterAddr: string;
   emitterChain: number;
   guardianSetIndex: number;
@@ -250,13 +240,12 @@ type TVAA = {
   version: number;
 };
 
-type TVAACount = {
+export type TVAACount = {
   chainId: ChainID;
   count: number;
 };
 
 export interface IVAAsInput extends TSortOptions {}
-
 export interface IVAAs {
   data: TVAA[];
   pagination: Pagination;
