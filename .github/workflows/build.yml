@@ -1,0 +1,34 @@
+name: Build lib
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build_deploy_gh_page:
+    name: Build lib on lib branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repos develop branch
+        uses: actions/checkout@v3
+        with:
+          ref: "develop"
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Build package into lib branch
+        run: |
+          yarn install --frozen-lockfile
+          yarn global add rimraf
+          yarn build
+          yarn pack --filename package.tgz
+          tar -xvf package.tgz
+          rimraf package.tgz
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          yarn global add push-dir
+          push-dir --dir=package --branch=lib --cleanup --verbose
