@@ -1,4 +1,4 @@
-export enum ChainID {
+export enum ChainId {
   Unset = 0,
   Solana = 1,
   Ethereum = 2,
