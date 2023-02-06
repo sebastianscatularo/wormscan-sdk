@@ -19,7 +19,8 @@
     "strictNullChecks": false,
     "declaration": true,
     "noUnusedLocals": false,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "sourceMap": true
   },
   "include": ["src"]
 }
