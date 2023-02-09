@@ -2,11 +2,7 @@ import { AxiosClient, APIClient } from "./APIClient";
 import { Governor } from "./Governor";
 import { Environment } from "./Environment";
 import { Guardian } from "./Guardian";
-
-export enum Status {
-  OK = "ok",
-  ERROR = "error",
-}
+import { _get } from "./Objects";
 
 export class Wormscan {
   private readonly _governor: Governor;
@@ -25,12 +21,22 @@ export class Wormscan {
     return this._guardian;
   }
 
-  async isReady() {
-    return this._client.doGet<Status>("/ready");
+  async isReady(): Promise<boolean> {
+    return this._getStatus("/ready");
   }
 
-  async isHealth(): Promise<Status> {
-    return this._client.doGet<Status>("/health");
+  async isHealth(): Promise<boolean> {
+    return this._getStatus("/health");
+  }
+
+  private async _getStatus(path: string) {
+    try {
+      const payload = await this._client.doGet<{ status: string }>(path);
+      const status = payload.status || "";
+      return status === "OK";
+    } catch (err) {
+      return false;
+    }
   }
 }
 

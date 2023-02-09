@@ -1,4 +1,4 @@
-import createClient, { Status, Wormscan } from "./Wormscan";
+import createClient, { Wormscan } from "./Wormscan";
 import { Environment } from "./Environment";
 import axios, { AxiosResponse } from "axios";
 
@@ -38,8 +38,35 @@ describe("status", () => {
     wormscan = createClient();
   });
 
-  test("status is ok", async () => {
-    mocked.get.mockResolvedValue({ ...response, data: { status: "ok" } });
-    expect(await wormscan.isHealth()).toStrictEqual({ status: "ok" });
+  afterEach(() => mocked.get.mockClear());
+
+  test("isHealth", async () => {
+    mocked.get.mockResolvedValue({ ...response, data: { status: "OK" } });
+    expect(await wormscan.isHealth()).toBe(true);
+  });
+
+  test("isHealth false", async () => {
+    mocked.get.mockResolvedValue({ ...response, data: { status: "error" } });
+    expect(await wormscan.isHealth()).toBe(false);
+  });
+
+  test("isHealth (5xx) error", async () => {
+    mocked.get.mockRejectedValueOnce({ status: 500 });
+    expect(await wormscan.isHealth()).toBe(false);
+  });
+
+  test("isReady", async () => {
+    mocked.get.mockResolvedValue({ ...response, data: { status: "OK" } });
+    expect(await wormscan.isReady()).toBe(true);
+  });
+
+  test("isReady false", async () => {
+    mocked.get.mockResolvedValue({ ...response, data: { status: "error" } });
+    expect(await wormscan.isReady()).toBe(false);
+  });
+
+  test("isReady (5xx) error", async () => {
+    mocked.get.mockRejectedValueOnce({ status: 500 });
+    expect(await wormscan.isReady()).toBe(false);
   });
 });
