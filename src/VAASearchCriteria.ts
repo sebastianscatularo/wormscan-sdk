@@ -1,4 +1,4 @@
-type SpecificVAACriteria =
+export type SpecificVAACriteria =
   | {
       sequence: number;
       signer?: string;
