@@ -1,4 +1,4 @@
-export function _get<T>(obj: any, path: string, defaultValue: T) {
+export function _get<T>(obj: any, path: string | string[], defaultValue: T) {
   const pathArray = Array.isArray(path) ? path : path.split(".");
   let currentValue = obj;
   for (const key of pathArray) {
