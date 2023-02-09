@@ -8,9 +8,9 @@ export type Observation = {
   hash: string;
   guardianAddr: string;
   signature: string;
-} & Omit<VAA, "guardianSetIndex" | "vaa" | "timestamp">;
+} & Omit<VAADetail, "guardianSetIndex" | "vaa" | "timestamp">;
 
-export type VAA = {
+export type VAADetail = {
   sequence: number;
   id: string;
   version: number;
@@ -32,9 +32,9 @@ export type VAACount = {
 export class Guardian {
   constructor(private readonly _client: APIClient) {}
 
-  async getVAA(): Promise<VAA[]>;
-  async getVAA(criteria: VAASearchCriteria): Promise<VAA[]>;
-  async getVAA(criteria: VAASearchCriteria, page: PageRequest): Promise<VAA[]>;
+  async getVAA(): Promise<VAADetail[]>;
+  async getVAA(criteria: VAASearchCriteria): Promise<VAADetail[]>;
+  async getVAA(criteria: VAASearchCriteria, page: PageRequest): Promise<VAADetail[]>;
   async getVAA(criteria: VAASearchCriteria = null, page: PageRequest = DefaultPageRequest) {
     const effectivePath = this._vaaSearchCriteriaToPathSegmentFilter("/vaas", criteria);
     const payload = await this._client.doGet<any>(effectivePath, { params: { ...page } });
@@ -108,7 +108,7 @@ export class Guardian {
     updatedAt,
     indexedAt,
     txHash,
-  }: any): VAA => ({
+  }: any): VAADetail => ({
     sequence,
     id,
     version,
