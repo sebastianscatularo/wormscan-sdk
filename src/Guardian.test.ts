@@ -13,7 +13,17 @@ describe("guardian", () => {
     mocked.create.mockReturnThis();
     guardian = new Guardian(new AxiosClient());
   });
+
+  afterAll(() => {
+    mocked.get.mockClear();
+  });
+
   test("getVAAs", () => {
+    mocked.get.mockResolvedValueOnce({
+      data: {
+        data: [],
+      },
+    });
     guardian.getObservation({
       emmiter: "1",
       chainId: 0,
