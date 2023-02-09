@@ -2,7 +2,7 @@ import { APIClient } from "./APIClient";
 import { ChainId } from "./ChainId";
 import { _get } from "./Objects";
 
-interface Notional {
+type Notional = {
   id: string;
   chainId: ChainId;
   nodeName: string;
@@ -11,9 +11,9 @@ interface Notional {
   maxTransactionSize: number;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
-interface Node<C = any, T = any> {
+type Node<C = any, T = any> = {
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -21,58 +21,58 @@ interface Node<C = any, T = any> {
   counter: number;
   chains: C[];
   tokens: T[];
-}
+};
 
-export interface ChainNotionalAvailable
-  extends Omit<Notional, "maxTransactionSize" | "notionalLimit"> {}
-export interface NotionalAvailable
-  extends Omit<
-    Notional,
-    "id" | "maxTransactionSize" | "notionalLimit" | "nodeName" | "createdAt" | "updatedAt"
-  > {}
-export interface ChainNotionalLimit extends Omit<Notional, "availableNotional"> {}
-export interface NotionalLimit
-  extends Omit<Notional, "id" | "nodeName" | "createdAt" | "updatedAt"> {}
+export type ChainNotionalAvailable = Omit<Notional, "maxTransactionSize" | "notionalLimit">;
 
-export interface VAA {
+export type NotionalAvailable = Omit<
+  Notional,
+  "id" | "maxTransactionSize" | "notionalLimit" | "nodeName" | "createdAt" | "updatedAt"
+>;
+
+export type ChainNotionalLimit = Omit<Notional, "availableNotional">;
+
+export type NotionalLimit = Omit<Notional, "id" | "nodeName" | "createdAt" | "updatedAt">;
+
+export type VAA = {
   sequence: number;
   chainId: ChainId;
   emitterAddress: string;
   notionalValue: number;
   txHash: string;
   releaseTime: number;
-}
+};
 
 export interface Chain {
   chainId: ChainId;
   enqueuedVAA: Omit<VAA, "releaseTime">[];
 }
 
-export interface NodeConfiguration extends Node<ChainConfiguration, TokenConfiguration> {}
+export type NodeConfiguration = Node<ChainConfiguration, TokenConfiguration>;
 
-export interface ChainConfiguration {
+export type ChainConfiguration = {
   chainId: ChainId;
   notionalLimit: number;
   bigTransactionSize: number;
-}
+};
 
-export interface TokenConfiguration {
+export type TokenConfiguration = {
   originChainId: ChainId;
   originAddress: string;
   price: number;
-}
+};
 
-export interface NodeStatus extends Omit<Node<ChainStatus>, "tokens" | "counter"> {}
-export interface ChainStatus {
+export type NodeStatus = Omit<Node<ChainStatus>, "tokens" | "counter">;
+export type ChainStatus = {
   chainId: ChainId;
   remainingAvailableNotional: number;
   emitters: EmitterStatus[];
-}
+};
 
-export interface EmitterStatus {
+export type EmitterStatus = {
   emitterAddress: string;
   totalEnqueuedVAAs: number;
-}
+};
 
 export class Governor {
   constructor(private readonly _client: APIClient) {}
