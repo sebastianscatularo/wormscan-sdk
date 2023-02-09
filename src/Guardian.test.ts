@@ -1,5 +1,4 @@
 import axios from "axios";
-import exp from "constants";
 import { AxiosClient } from "./APIClient";
 import { ChainId } from "./ChainId";
 import { Guardian } from "./Guardian";

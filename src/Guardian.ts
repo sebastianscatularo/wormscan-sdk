@@ -1,4 +1,3 @@
-import { type } from "os";
 import { APIClient } from "./APIClient";
 import { ChainId } from "./ChainId";
 import { _get } from "./Objects";
