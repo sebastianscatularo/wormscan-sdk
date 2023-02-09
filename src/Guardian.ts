@@ -44,7 +44,7 @@ export class Guardian {
   }
 
   async getVAACount(): Promise<VAACount[]> {
-    const payload = this._client.doGet<any>("/vaas/vaa-counts");
+    const payload = await this._client.doGet<any>("/vaas/vaa-counts");
     const result = _get(payload, "data", []);
     return result.map(this._mapVAACount);
   }
