@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AxiosClient } from "./APIClient";
 import { ChainId } from "./ChainId";
-import { Guardian } from "./Guardian";
+import { GuardianNetwork } from "./GuardianNetwork";
 
 jest.mock("axios");
 
@@ -41,11 +41,11 @@ const observations = [
 ];
 
 describe("guardian", () => {
-  let guardian: Guardian;
+  let guardian: GuardianNetwork;
 
   beforeAll(() => {
     mocked.create.mockReturnThis();
-    guardian = new Guardian(new AxiosClient());
+    guardian = new GuardianNetwork(new AxiosClient());
   });
 
   afterEach(() => {

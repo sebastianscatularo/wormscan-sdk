@@ -29,7 +29,7 @@ export type VAACount = {
   count: number;
 };
 
-export class Guardian {
+export class GuardianNetwork {
   constructor(private readonly _client: APIClient) {}
 
   async getVAA(): Promise<VAADetail[]>;
