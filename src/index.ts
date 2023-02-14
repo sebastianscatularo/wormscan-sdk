@@ -325,7 +325,6 @@ class WormScanSDK {
 
 export default WormScanSDK;
 
-export * from "./ChainId";
 export type {
   TGovernorConfiguration,
   TGovernorsEnqueuedVAAs,
@@ -338,10 +337,8 @@ export type {
   TVAACount,
 } from "./interfaces";
 
-export * from "./Wormscan";
-export * from "./Governor";
-export * from "./GuardianNetwork";
-export * from "./APIClient";
-export * from "./PageRequest";
-export * from "./Environment";
-export * from "./VAASearchCriteria";
+export * from "./wormscan";
+export * from "./governor";
+export * from "./guardian-network";
+export * from "./api-client";
+export * from "./model";
