@@ -1,6 +1,6 @@
 import { AxiosClient, APIClient } from "./APIClient";
 import { Governor } from "./Governor";
-import { Environment } from "./Environment";
+import environment from "./Environment";
 import { GuardianNetwork } from "./GuardianNetwork";
 import { _get } from "./Objects";
 
@@ -17,7 +17,7 @@ export class Wormscan {
     return this._governor;
   }
 
-  get guardian(): GuardianNetwork {
+  get guardianNetwork(): GuardianNetwork {
     return this._guardian;
   }
 
@@ -40,8 +40,10 @@ export class Wormscan {
   }
 }
 
-export function createClient(env?: Environment) {
+export function createClient(env: string = environment) {
   return new Wormscan(new AxiosClient(env));
 }
 
-export default createClient;
+const client: Wormscan = createClient();
+
+export default client;

@@ -1,5 +1,4 @@
 import axios, { Axios, AxiosError } from "axios";
-import { Environment } from "./Environment";
 
 export interface APIClient {
   doGet<T>(path: string, params?: any): Promise<T> | T;
@@ -8,7 +7,7 @@ export interface APIClient {
 export class AxiosClient implements APIClient {
   private readonly _client: Axios;
 
-  constructor(baseURL: Environment = Environment.STAGING) {
+  constructor(baseURL: string) {
     this._client = axios.create({ baseURL });
   }
 

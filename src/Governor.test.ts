@@ -1,5 +1,4 @@
 import axios from "axios";
-import { AxiosClient } from "./APIClient";
 import { ChainId } from "./ChainId";
 import { Governor, NodeConfiguration, NodeStatus, NotionalLimit } from "./Governor";
 
@@ -33,9 +32,10 @@ const data = [
 describe("governor", () => {
   let governor: Governor;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     mocked.create.mockReturnThis();
-    governor = new Governor(new AxiosClient());
+    const { default: client } = await import("./Wormscan");
+    governor = client.governor;
   });
 
   afterEach(() => mocked.get.mockClear());
