@@ -1,8 +1,8 @@
-import { AxiosClient, APIClient } from "./APIClient";
-import { Governor } from "./Governor";
-import environment from "./Environment";
-import { GuardianNetwork } from "./GuardianNetwork";
-import { _get } from "./Objects";
+import { AxiosClient, APIClient } from "../api-client";
+import { Governor } from "../governor";
+import environment from "../model/Environment";
+import { GuardianNetwork } from "../guardian-network";
+import { _get } from "../utils/Objects";
 
 export class Wormscan {
   private readonly _governor: Governor;

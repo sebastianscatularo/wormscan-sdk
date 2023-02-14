@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ChainId } from "./ChainId";
-import { Governor, NodeConfiguration, NodeStatus, NotionalLimit } from "./Governor";
+import { ChainId } from "../../model";
+import { Governor, NodeConfiguration, NodeStatus, NotionalLimit } from "../../governor";
 
 jest.mock("axios");
 const mocked = axios as jest.Mocked<typeof axios>;
@@ -34,7 +34,7 @@ describe("governor", () => {
 
   beforeAll(async () => {
     mocked.create.mockReturnThis();
-    const { default: client } = await import("./Wormscan");
+    const { default: client } = await import("../../wormscan/Wormscan");
     governor = client.governor;
   });
 

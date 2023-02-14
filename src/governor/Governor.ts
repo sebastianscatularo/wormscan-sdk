@@ -1,6 +1,6 @@
-import { APIClient } from "./APIClient";
-import { ChainId } from "./ChainId";
-import { _get } from "./Objects";
+import { APIClient } from "../api-client";
+import { ChainId } from "../model";
+import { _get } from "../utils/Objects";
 
 type Notional = {
   id: string;
