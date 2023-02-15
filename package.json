@@ -50,6 +50,9 @@
   "jest": {
     "globals": {
       "window": {}
+    },
+    "moduleNameMapper": {
+      "src/(.*)": "<rootDir>/src/$1"
     }
   },
   "babel": {

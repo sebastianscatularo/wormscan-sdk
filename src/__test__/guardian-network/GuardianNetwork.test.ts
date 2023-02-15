@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ChainId } from "./ChainId";
-import { GuardianNetwork } from "./GuardianNetwork";
+import { ChainId } from "src/model";
+import { GuardianNetwork } from "src/guardian-network";
 
 jest.mock("axios");
 
@@ -44,7 +44,7 @@ describe("guardian", () => {
 
   beforeAll(async () => {
     mocked.create.mockReturnThis();
-    const { default: client } = await import("./Wormscan");
+    const { default: client } = await import("../../wormscan/Wormscan");
     guardian = client.guardianNetwork;
   });
 

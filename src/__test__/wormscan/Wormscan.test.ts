@@ -1,4 +1,4 @@
-import { Wormscan, createClient } from "./Wormscan";
+import { Wormscan, createClient } from "src/wormscan/Wormscan";
 import axios, { AxiosResponse } from "axios";
 
 jest.mock("axios");
@@ -12,7 +12,7 @@ describe("createClient", () => {
   beforeAll(async () => {
     mocked.create.mockClear();
     mocked.create.mockReturnThis();
-    const { createClient: _create } = await import("./Wormscan");
+    const { createClient: _create } = await import("../../wormscan/Wormscan");
     createClient = _create;
   });
 
