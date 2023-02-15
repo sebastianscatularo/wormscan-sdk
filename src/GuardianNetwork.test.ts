@@ -1,5 +1,4 @@
 import axios from "axios";
-import { AxiosClient } from "./APIClient";
 import { ChainId } from "./ChainId";
 import { GuardianNetwork } from "./GuardianNetwork";
 
@@ -43,9 +42,10 @@ const observations = [
 describe("guardian", () => {
   let guardian: GuardianNetwork;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     mocked.create.mockReturnThis();
-    guardian = new GuardianNetwork(new AxiosClient());
+    const { default: client } = await import("./Wormscan");
+    guardian = client.guardianNetwork;
   });
 
   afterEach(() => {

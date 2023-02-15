@@ -47,6 +47,11 @@
   "peerDependencies": {
     "axios": "^1.2.5"
   },
+  "jest": {
+    "globals": {
+      "window": {}
+    }
+  },
   "babel": {
     "presets": [
       [

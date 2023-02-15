@@ -1,5 +1,4 @@
-import createClient, { Wormscan } from "./Wormscan";
-import { Environment } from "./Environment";
+import { Wormscan, createClient } from "./Wormscan";
 import axios, { AxiosResponse } from "axios";
 
 jest.mock("axios");
@@ -8,32 +7,41 @@ const mocked = axios as jest.Mocked<typeof axios>;
 const response: AxiosResponse = { status: 200, statusText: "ok" } as AxiosResponse;
 
 describe("createClient", () => {
+  let createClient: any;
+
+  beforeAll(async () => {
+    mocked.create.mockClear();
+    mocked.create.mockReturnThis();
+    const { createClient: _create } = await import("./Wormscan");
+    createClient = _create;
+  });
+
   afterEach(() => {
     mocked.create.mockClear();
   });
 
   test("should return a new client with the default environment", () => {
-    mocked.create.mockReturnThis();
     createClient();
     expect(mocked.create.mock.calls).toHaveLength(1);
     expect(mocked.create.mock.calls[0][0]).toStrictEqual({
-      baseURL: "http://api.staging.wormscan.io/api/v1",
+      baseURL: "https://api.wormscan.io/api/v1",
     });
   });
 
   test("should return a new client for the given environment", () => {
-    mocked.create.mockReturnThis();
-    createClient(Environment.STAGING);
+    createClient("http://api.staging.wormscan.io/api/v1");
     expect(mocked.create.mock.calls).toHaveLength(1);
     expect(mocked.create.mock.calls[0][0]).toStrictEqual({
-      baseURL: Environment.STAGING,
+      baseURL: "http://api.staging.wormscan.io/api/v1",
     });
   });
 });
 
 describe("status", () => {
   let wormscan: Wormscan;
-  beforeAll(() => {
+
+  beforeAll(async () => {
+    mocked.create.mockClear();
     mocked.create.mockReturnThis();
     wormscan = createClient();
   });
