@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ChainId } from "../../model/ChainId";
-import { GuardianNetwork } from "../../guardian-network";
+import { ChainId } from "src/model";
+import { GuardianNetwork } from "src/guardian-network";
 
 jest.mock("axios");
 

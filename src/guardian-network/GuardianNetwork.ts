@@ -1,6 +1,6 @@
-import { APIClient } from "../api-client";
-import { ChainId, DefaultPageRequest, PageRequest, VAASearchCriteria } from "../model";
-import { _get } from "../utils/Objects";
+import { APIClient } from "src/api-client";
+import { ChainId, DefaultPageRequest, PageRequest, VAASearchCriteria } from "src/model";
+import { _get } from "src/utils/Objects";
 
 export type Observation = {
   hash: string;

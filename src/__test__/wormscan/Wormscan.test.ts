@@ -1,4 +1,4 @@
-import { Wormscan, createClient } from "../../wormscan/Wormscan";
+import { Wormscan, createClient } from "src/wormscan/Wormscan";
 import axios, { AxiosResponse } from "axios";
 
 jest.mock("axios");

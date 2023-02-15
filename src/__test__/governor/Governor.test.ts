@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ChainId } from "../../model";
-import { Governor, NodeConfiguration, NodeStatus, NotionalLimit } from "../../governor";
+import { ChainId } from "src/model";
+import { Governor, NodeConfiguration, NodeStatus, NotionalLimit } from "src/governor";
 
 jest.mock("axios");
 const mocked = axios as jest.Mocked<typeof axios>;
