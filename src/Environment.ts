@@ -6,10 +6,6 @@ declare global {
   }
 }
 
-if (!!window.wormscan) {
-  window.wormscan = {};
-}
-
-const baseUrl = window.wormscan.baseUrl ?? "https://api.wormscan.io/api/v1";
+const { baseUrl = "https://api.wormscan.io/api/v1" } = window.wormscan || {};
 
 export default baseUrl;
