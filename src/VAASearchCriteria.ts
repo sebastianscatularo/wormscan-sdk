@@ -1,8 +1,8 @@
-type SpecificVAACriteria =
+export type SpecificVAACriteria =
   | {
       sequence: number;
-      signer?: string;
-      hash?: string;
+      signer?: undefined;
+      hash?: undefined;
     }
   | {
       sequence: number;
@@ -13,13 +13,13 @@ type SpecificVAACriteria =
 export type VAASearchCriteria =
   | {
       chainId: number;
-      emmiter?: string;
-      specific?: SpecificVAACriteria;
+      emmiter?: undefined;
+      specific?: undefined;
     }
   | {
       chainId: number;
       emmiter: string;
-      specific?: SpecificVAACriteria;
+      specific?: undefined;
     }
   | {
       chainId: number;

@@ -1,36 +1,42 @@
 import { AxiosClient, APIClient } from "./APIClient";
 import { Governor } from "./Governor";
 import { Environment } from "./Environment";
-import { Guardian } from "./Guardian";
-
-export enum Status {
-  OK = "ok",
-  ERROR = "error",
-}
+import { GuardianNetwork } from "./GuardianNetwork";
+import { _get } from "./Objects";
 
 export class Wormscan {
   private readonly _governor: Governor;
-  private readonly _guardian: Guardian;
+  private readonly _guardian: GuardianNetwork;
 
   constructor(private readonly _client: APIClient) {
     this._governor = new Governor(this._client);
-    this._guardian = new Guardian(this._client);
+    this._guardian = new GuardianNetwork(this._client);
   }
 
   get governor(): Governor {
     return this._governor;
   }
 
-  get guardian(): Guardian {
+  get guardian(): GuardianNetwork {
     return this._guardian;
   }
 
-  async isReady() {
-    return this._client.doGet<Status>("/ready");
+  async isReady(): Promise<boolean> {
+    return this._getStatus("/ready");
   }
 
-  async isHealth(): Promise<Status> {
-    return this._client.doGet<Status>("/health");
+  async isHealth(): Promise<boolean> {
+    return this._getStatus("/health");
+  }
+
+  private async _getStatus(path: string) {
+    try {
+      const payload = await this._client.doGet<{ status: string }>(path);
+      const status = payload.status || "";
+      return status === "OK";
+    } catch (err) {
+      return false;
+    }
   }
 }
 

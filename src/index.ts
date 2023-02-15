@@ -340,7 +340,7 @@ export type {
 
 export * from "./Wormscan";
 export * from "./Governor";
-export * from "./Guardian";
+export * from "./GuardianNetwork";
 export * from "./APIClient";
 export * from "./PageRequest";
 export * from "./Environment";
