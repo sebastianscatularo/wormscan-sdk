@@ -6,7 +6,9 @@ declare global {
   }
 }
 
-window.wormscan = {};
+if (!!window.wormscan) {
+  window.wormscan = {};
+}
 
 const baseUrl = window.wormscan.baseUrl ?? "https://api.wormscan.io/api/v1";
 
