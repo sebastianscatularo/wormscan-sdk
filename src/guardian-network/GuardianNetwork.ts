@@ -12,7 +12,7 @@ export type VAADetail = {
   sequence: number;
   id: string;
   version: number;
-  emitterChain: ChainId;
+  emitterChainId: ChainId;
   emitterAddr: string;
   guardianSetIndex: number;
   vaa: string;
@@ -63,10 +63,7 @@ export class GuardianNetwork {
       .join("/");
   }
 
-  private _mapVAACount = ({ chainId, count }: any): VAACount => ({
-    chainId: ChainId[chainId] as unknown as ChainId,
-    count,
-  });
+  private _mapVAACount = ({ chainId, count }: any): VAACount => ({ chainId, count });
 
   private _mapObservation = ({
     sequence,
@@ -84,7 +81,7 @@ export class GuardianNetwork {
     sequence,
     id,
     version,
-    emitterChain: ChainId[emitterChain] as unknown as ChainId,
+    emitterChainId: emitterChain,
     emitterAddr,
     hash,
     txHash,
@@ -110,7 +107,7 @@ export class GuardianNetwork {
     sequence,
     id,
     version,
-    emitterChain: ChainId[emitterChain] as unknown as ChainId,
+    emitterChainId: emitterChain,
     emitterAddr,
     guardianSetIndex,
     vaa,

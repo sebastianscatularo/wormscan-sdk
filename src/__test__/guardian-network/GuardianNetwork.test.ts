@@ -60,7 +60,7 @@ describe("guardian", () => {
     expect(vaa.sequence).toBe(9269);
     expect(vaa.id).toBe("22/0000000000000000000000000000000000000000000000000000000000000001/9269");
     expect(vaa.version).toBe(1);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.Aptos]);
+    expect(vaa.emitterChainId).toBe(ChainId.Aptos);
     expect(vaa.emitterAddr).toBe(
       "0000000000000000000000000000000000000000000000000000000000000001",
     );
@@ -85,7 +85,7 @@ describe("guardian", () => {
     expect(vaa.sequence).toBe(9269);
     expect(vaa.id).toBe("22/0000000000000000000000000000000000000000000000000000000000000001/9269");
     expect(vaa.version).toBe(1);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.Aptos]);
+    expect(vaa.emitterChainId).toBe(ChainId.Aptos);
     expect(vaa.emitterAddr).toBe(
       "0000000000000000000000000000000000000000000000000000000000000001",
     );
@@ -113,7 +113,7 @@ describe("guardian", () => {
     expect(vaa.sequence).toBe(9269);
     expect(vaa.id).toBe("22/0000000000000000000000000000000000000000000000000000000000000001/9269");
     expect(vaa.version).toBe(1);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.Aptos]);
+    expect(vaa.emitterChainId).toBe(ChainId.Aptos);
     expect(vaa.emitterAddr).toBe(
       "0000000000000000000000000000000000000000000000000000000000000001",
     );
@@ -144,7 +144,7 @@ describe("guardian", () => {
     expect(vaa.sequence).toBe(9269);
     expect(vaa.id).toBe("22/0000000000000000000000000000000000000000000000000000000000000001/9269");
     expect(vaa.version).toBe(1);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.Aptos]);
+    expect(vaa.emitterChainId).toBe(ChainId.Aptos);
     expect(vaa.emitterAddr).toBe(
       "0000000000000000000000000000000000000000000000000000000000000001",
     );
@@ -175,7 +175,7 @@ describe("guardian", () => {
     expect(vaa.sequence).toBe(9269);
     expect(vaa.id).toBe("22/0000000000000000000000000000000000000000000000000000000000000001/9269");
     expect(vaa.version).toBe(1);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.Aptos]);
+    expect(vaa.emitterChainId).toBe(ChainId.Aptos);
     expect(vaa.emitterAddr).toBe(
       "0000000000000000000000000000000000000000000000000000000000000001",
     );
@@ -203,7 +203,7 @@ describe("guardian", () => {
     const counts = await guardian.getVAACount();
     const count = counts.pop();
     expect(mocked.get.mock.calls[0][0]).toBe("/vaas/vaa-counts");
-    expect(count.chainId).toBe(ChainId[ChainId.Solana]);
+    expect(count.chainId).toBe(ChainId.Solana);
     expect(count.count).toBe(100);
   });
 
@@ -217,7 +217,7 @@ describe("guardian", () => {
       "4/000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7/231494/74a3bf913953d695260d88bc1aa25a4eee363ef0/9f20efee9d477aaeb370daa92efe7c8dfab0b3669ab99f4ea4266ce0fb34109e",
     );
     expect(vaa.version).toBe(0);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.BSC]);
+    expect(vaa.emitterChainId).toBe(ChainId.BSC);
     expect(vaa.emitterAddr).toBe(
       "000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7",
     );
@@ -238,7 +238,7 @@ describe("guardian", () => {
       "4/000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7/231494/74a3bf913953d695260d88bc1aa25a4eee363ef0/9f20efee9d477aaeb370daa92efe7c8dfab0b3669ab99f4ea4266ce0fb34109e",
     );
     expect(vaa.version).toBe(0);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.BSC]);
+    expect(vaa.emitterChainId).toBe(ChainId.BSC);
     expect(vaa.emitterAddr).toBe(
       "000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7",
     );
@@ -263,7 +263,7 @@ describe("guardian", () => {
       "4/000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7/231494/74a3bf913953d695260d88bc1aa25a4eee363ef0/9f20efee9d477aaeb370daa92efe7c8dfab0b3669ab99f4ea4266ce0fb34109e",
     );
     expect(vaa.version).toBe(0);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.BSC]);
+    expect(vaa.emitterChainId).toBe(ChainId.BSC);
     expect(vaa.emitterAddr).toBe(
       "000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7",
     );
@@ -291,7 +291,7 @@ describe("guardian", () => {
       "4/000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7/231494/74a3bf913953d695260d88bc1aa25a4eee363ef0/9f20efee9d477aaeb370daa92efe7c8dfab0b3669ab99f4ea4266ce0fb34109e",
     );
     expect(vaa.version).toBe(0);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.BSC]);
+    expect(vaa.emitterChainId).toBe(ChainId.BSC);
     expect(vaa.emitterAddr).toBe(
       "000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7",
     );
@@ -321,7 +321,7 @@ describe("guardian", () => {
       "4/000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7/231494/74a3bf913953d695260d88bc1aa25a4eee363ef0/9f20efee9d477aaeb370daa92efe7c8dfab0b3669ab99f4ea4266ce0fb34109e",
     );
     expect(vaa.version).toBe(0);
-    expect(vaa.emitterChain).toBe(ChainId[ChainId.BSC]);
+    expect(vaa.emitterChainId).toBe(ChainId.BSC);
     expect(vaa.emitterAddr).toBe(
       "000000000000000000000000b6f6d86a8f9879a9c87f643768d9efc38c1da6e7",
     );
