@@ -7,13 +7,9 @@ const mocked = axios as jest.Mocked<typeof axios>;
 const response: AxiosResponse = { status: 200, statusText: "ok" } as AxiosResponse;
 
 describe("createClient", () => {
-  let createClient: any;
-
-  beforeAll(async () => {
+  beforeAll(() => {
     mocked.create.mockClear();
     mocked.create.mockReturnThis();
-    const { createClient: _create } = await import("../../wormscan/Wormscan");
-    createClient = _create;
   });
 
   afterEach(() => {

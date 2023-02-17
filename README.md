@@ -30,7 +30,9 @@ yarn tsc -init
 
 ```typescript
 cat <<\EOF>>src/index.ts
-import client from '@xlabs-libs/wormscan-sdk';
+import { createClient } from '@xlabs-libs/wormscan-sdk';
+
+const client = createClient();
 
 console.log(client.isHealth());
 console.log(client.isReady());
@@ -55,14 +57,21 @@ yarn init -y
 yarn add ts-node typescript github:xlabs/wormscan-sdk#lib
 yarn tsc -init
 
-cat <<\EOF>> src/index.ts
-import client from '@xlabs-libs/wormscan-sdk';
+cat <<\EOF>>src/index.ts
+import { createClient } from '@xlabs-libs/wormscan-sdk';
 
-console.log(client.isHealth());
-console.log(client.isReady());
-console.log(client.governor.getConfiguration());
-console.log(client.guardianNetwork.getVAACount());
+const client = createClient('http://api.staging.wormscan.io/api/v1');
+
+async function doCall() {
+  console.log(await client.isHealth());
+  console.log(await client.isReady());
+  console.log(await client.governor.getConfiguration());
+  console.log(await client.guardianNetwork.getVAACount());
+}
+
+doCall();
 EOF
 
 yarn ts-node src/index.ts
+
 ```

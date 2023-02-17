@@ -1,6 +1,5 @@
 import { AxiosClient, APIClient } from "src/api-client";
 import { Governor } from "src/governor";
-import environment from "src/model/Environment";
 import { GuardianNetwork } from "src/guardian-network";
 import { _get } from "src/utils/Objects";
 
@@ -40,10 +39,6 @@ export class Wormscan {
   }
 }
 
-export function createClient(env: string = environment) {
-  return new Wormscan(new AxiosClient(env));
+export function createClient(baseUrl: string = "https://api.wormscan.io/api/v1") {
+  return new Wormscan(new AxiosClient(baseUrl));
 }
-
-const client: Wormscan = createClient();
-
-export default client;
